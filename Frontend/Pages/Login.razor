@@ -1,0 +1,84 @@
+@page "/login"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+
+<a href="/">
+    <div class="div_BackHome"> &lt; voltar</div>
+</a>
+<div class="Logo">
+    <span class="span_authentic">authentic</span><span class="span_on">on</span>
+</div>
+<div class="TitleLoginAccount">Entrar com a sua conta</div>
+<div class="TitleWelcome">
+    <span class="span_welcome">Bem-vindo(a) </span>
+    <span class="span_back">de volta!</span>
+</div>
+<div class="div_Inputs">
+    <input type="email" id="Email" @bind="Email" placeholder="E-mail" class="inter-medium-granite-gray-18px" />
+    <input type="password" id="Password" @bind="Password" placeholder="Senha" class="inter-medium-granite-gray-18px" />
+</div>
+@* <a class="forgotPassword inter-medium-azure-radiance-18px">Esqueceu a senha?</a> *@
+<button class="btn_LoginSingUp btn_Login" data-toggle="modal" data-target="#exampleModalCenter" type="button"
+    @onclick="LoginUser">Entrar na conta </button>
+<div class="div_SignUp">
+    <span class="span inter-medium-woodsmoke-18px">Ainda não tem uma conta? </span>
+    <a href="/customerRegistration">
+        <span class="span_Underline inter-medium-azure-radiance-18px">Cadastre-se aqui!</span>
+    </a>
+</div>
+<img class="img_LoginSingUp" src="Imagens/LoginImg.png" alt="Rectangle 6" />
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string Email { get; set; } = null!;
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string Password { get; set; } = null!;
+    public Person? person { get; set; } = null!;
+    public bool UserDialogOpen;
+    bool Found = false;
+
+    protected async Task LoginUser()
+    {
+        await JS.InvokeVoidAsync("ValidateInputLogin");
+
+        var login = new Login { Email = Email, Password = Password };
+        try
+        {
+            if (Email != null && Password != null)
+            {
+                person = await Http.GetFromJsonAsync<Person>($"login?email={Email}&password={Password}");
+                if (person != null)
+                {
+                    int id = person.UserID;
+                    Found = true;
+                    Navigation.NavigateTo($"/home/{id}");
+                }
+            }
+
+
+        }
+        catch (Exception)
+        {
+            if (Email is String && Password is String && Found != true)
+            {
+                await JS.InvokeVoidAsync("ModalNotFound");
+                await JS.InvokeVoidAsync("CleanInputLogin");
+            }
+
+        }
+
+    }
+    public class Person
+    {
+        public int UserID { get; set; }
+
+        public string? Name { get; set; }
+
+        public string Email { get; set; } = null!;
+
+        public int Status { get; set; }
+    }
+}

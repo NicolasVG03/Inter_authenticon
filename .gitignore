@@ -1,0 +1,6 @@
+**/Backend/bin
+**/Backend/obj
+ImagensDownload
+**/.vscode/
+**/Frontend/obj
+**/Frontend/bin

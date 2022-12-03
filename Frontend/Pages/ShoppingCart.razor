@@ -1,0 +1,117 @@
+@page "/shoppingcart/{Id:int}"
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<Header></Header>
+<div class="div_TitleShoppingCart">Meu Carrinho</div>
+<div class="div_ShoppingCart">
+    <div class="card mb-3 card_ProductShoppingCart" style="max-width: 540px;">
+        <div class="row g-0 cardProduct">
+            <div class="col-md-4 col_ImgProductShoppingCart">
+                <img src="Imagens/img_ListProducts1.png" class="Img_ProductShoppingCart" alt="...">
+            </div>
+            <div class="col-md-8 col_InformationProductShoppingCart">
+                <div class="card-body div_InformationProductShoppingCart">
+                    <div class="div_InformationAboutProductTitle inter-medium-woodsmoke-32px">Bolsa Masculina
+                        Street</div>
+                    <div class="div_InformationAboutProduct">
+                        <div class="div_InformationAboutProductEspecific">
+                            <div class="div_InformationAboutProductEspecificName inter-normal-woodsmoke-20px">Cor</div>
+                            <div class="div_InformationAboutProductEspecificInformation inter-normal-woodsmoke-20px">
+                                Preto</div>
+                        </div>
+                        <div class="div_InformationAboutProductEspecific">
+                            <div class="div_InformationAboutProductEspecificName inter-normal-woodsmoke-20px">Tamanho
+                            </div>
+                            <div class="div_InformationAboutProductEspecificInformation inter-normal-woodsmoke-20px">M
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+                        <button type="button" class="btn btn-outline-primary btn_QuantityProduct left">-</button>
+                        <span class="btn btn-outline-primary btn_QuantityProduct left right">1</span>
+                        <button type="button" class="btn btn-outline-primary btn_QuantityProduct right">+</button>
+                    </div>
+                    <div class="div_productDelete">
+                        <img class="x-VOKTQe" src="Imagens/icon_CleanShoppingCart.png" alt="x" />
+                        <div class="limpar-carrinho-VOKTQe inter-bold-cinnabar-16px">Excluir item
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="frame-108-SeaE7m checkout">
+    <div class="frame-107-3cOhyn">
+        <div class="frame-106-xGLKU1">
+            <div class="div_TitleCheckout">
+                <div class="inter-bold-woodsmoke-32px">Resumo do pedido</div>
+            </div>
+            <div class="div_InformationCheckout">
+                <div class="div_InformationCheckoutItem">
+                    <div class="subtotal-j4Gqq0 inter-normal-woodsmoke-20px">Subtotal</div>
+                    <div class="r36000-j4Gqq0 inter-normal-woodsmoke-20px">R$360,00</div>
+                </div>
+                <div class="div_InformationCheckoutItem">
+                    <div class="frete-R2JgqW inter-normal-woodsmoke-20px">Frete</div>
+                    <div class="frete-grtis-R2JgqW">Frete grátis</div>
+                </div>
+                <div class="div_InformationCheckoutItem">
+                    <div class="total-do-pedido-afnQ2G inter-normal-woodsmoke-20px">Total do pedido</div>
+                    <div class="r36000-afnQ2G inter-normal-woodsmoke-20px">R$360,00</div>
+                </div>
+            </div>
+            <div class="cupom-de-desconto-tQ2FSQ inter-bold-woodsmoke-24px">Cupom de desconto</div>
+            <div class="input-group mb-3 div_InputCupom">
+                <input type="text" class="form-control insira-o-cdigo-ordflx" placeholder="Insira o código"
+                    aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary btn_OkCupom" type="button" id="button-addon2">ok</button>
+            </div>
+            <div class="btn_colection-SeaE7m">
+                <div class="btn_FinalizeOrder">Finalizar Compra</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="div_FooterProducts">
+    <div class="div_FooterCenterItems">
+        <div class="div_FooterPart1">
+            <a class="a_FooterLogo poppins-bold-white-22px" href="/">
+                <span class="span_authentic_white">authentic</span><span class="span_on">on</span>
+            </a>
+            <div class="div_FooterCopyright">@@Copyright2022authenticon</div>
+        </div>
+        <img class="img_LineFooter" src="Imagens/img_LineFooter.png" alt="Vector 5" />
+        <div class="div_FooterPart2">
+            <div class="div_FooterPart2Items">
+                <div class="div_FooterPart2Brazil">
+                    <img class="img_FooterBrazil" src="Imagens/icon_BrazilFlag.png" alt="Frame 72" />
+                    <div class="div_FooterBrazilText bodyb1">Brasil</div>
+                </div>
+                <div class="div_FooterNewsletter bodyb1">Newsletter</div>
+                <div class="div_FooterContact bodyb1">Contato</div>
+                <a href="/products/Lançamentos">
+                    <div class="div_FooterLaunch bodyb1">Lançamentos</div>
+                </a>
+                <a href="/products/Feminino">
+                    <div class="div_FooterFeminine bodyb1">Feminino</div>
+                </a>
+                <a href="/products/Masculino">
+                    <div class="div_FooterMasculine bodyb1">Masculino</div>
+                </a>
+            </div>
+            <a href="/shoppingcart/@Id">
+                <div class="div_FooterGoBeginning">Voltar ao início</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public int? Id { get; set; }
+
+}

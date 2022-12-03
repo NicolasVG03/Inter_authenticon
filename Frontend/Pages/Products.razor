@@ -1,0 +1,236 @@
+@page "/products/{Name}"
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<Header></Header>
+@* <div class="filter">
+    <div class="" id="accordionExample">
+    <div class="card div_Filter" @onclick="ChangeImgSize">
+    <button class="@classNameSize" type="button" data-toggle="collapse" data-target="#collapseOne"
+    aria-expanded="false" aria-controls="collapseOne" id="btn_FilterSize">
+    Tamanho
+    <img class="img_BtnFilter" src='@srcSize' id="img_BtnFilterSize">
+    </button>
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div class="card-body FilterSize">
+    <div class="">
+    <div class="frame-48-tdpODi">
+    <button @onclick="FilterSize" class=" btn_FilterSize subtitleprice">PP</button>
+    <button @onclick="FilterSize" class=" btn_FilterSize subtitleprice">P</button>
+    <button @onclick="FilterSize" class="btn_FilterSize subtitleprice">M</button>
+
+    </div>
+    <div class="frame-49-tdpODi">
+    <button @onclick="FilterSize" class="btn_FilterSize subtitleprice">G</button>
+    <button @onclick="FilterSize" class="btn_FilterSize subtitleprice">GG</button>
+    <button @onclick="FilterSize" class="btn_FilterSize subtitleprice">XG</button>
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="card div_Filter" @onclick="ChangeImgPrice">
+    <button class="@classNamePrice" type="button" data-toggle="collapse" data-target="#collapseTwo"
+    aria-expanded="false" aria-controls="collapseTwo" id="btn_FilterPrice">
+    Preço
+    <img class="img_BtnFilter" src='@srcPrice' id="img_BtnFilterPrice">
+    </button>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+    <div class="card-body">
+    <button class="btn_FilterPrice inter-medium-woodsmoke-18px" id="100">Até R$ 100</button>
+    <button class="btn_FilterPrice inter-medium-woodsmoke-18px" id="200">Entre R$ 100 - R$ 200</button>
+    <button class="btn_FilterPrice inter-medium-woodsmoke-18px" id="300">Entre R$ 200 - R$ 300</button>
+    <button class="btn_FilterPrice inter-medium-woodsmoke-18px" id="400">Entre R$ 300 - R$ 400</button>
+    <button class="btn_FilterPrice inter-medium-woodsmoke-18px" id="401">Acima de R$ 400</button>
+    </div>
+    </div>
+    </div>
+    </div> *@
+<div class="div_ProductItems">
+    <div class="div_ProductItemsHeader">
+        <div class="div_ProductIHeadeMasculine inter-semi-bold-woodsmoke-18px">@collectionChosen.Name</div>
+    </div>
+    <div class="album py-5 bg-light div_products">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                @if (products != null)
+                {
+                    @foreach (var product in products)
+                    {
+                        <div class="col div_productsCol">
+                            <img class="Img_Products" src="Imagens/img_ListProducts1.png" alt="Rectangle 17" />
+                            <div class="frame-56-ZxxJx8">
+                                <div class="frame-55-gX3aRH">
+                                    <div class="div_productTitle bodyb1">@product.Name</div>
+                                    <div class="casual-dxaCBP subtitlesb1">@product.Description</div>
+                                </div>
+                                <div class="r-21000-gX3aRH subtitleprice">R$ @product.UnitPrice</div>
+                                @* <button class="btn btn-primary" onclick="() => OpenProductModal()" type="button">Ver
+                                    Produto</button> *@
+                            </div>
+                        </div>
+                    }
+                }
+                <button class="btn btn-primary" type="button" @onclick="() => OpenProductModal()">Ver
+                    Produto</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="div_FooterProducts">
+    <div class="div_FooterCenterItems">
+        <div class="div_FooterPart1">
+            <a class="a_FooterLogo poppins-bold-white-22px" href="/">
+                <span class="span_authentic_white">authentic</span><span class="span_on">on</span>
+            </a>
+            <div class="div_FooterCopyright">@@Copyright2022authenticon</div>
+        </div>
+        <img class="img_LineFooter" src="Imagens/img_LineFooter.png" alt="Vector 5" />
+        <div class="div_FooterPart2">
+            <div class="div_FooterPart2Items">
+                <div class="div_FooterPart2Brazil">
+                    <img class="img_FooterBrazil" src="Imagens/icon_BrazilFlag.png" alt="Frame 72" />
+                    <div class="div_FooterBrazilText bodyb1">Brasil</div>
+                </div>
+                <div class="div_FooterNewsletter bodyb1">Newsletter</div>
+                <div class="div_FooterContact bodyb1">Contato</div>
+                <a href="/products/Lançamentos">
+                    <div class="div_FooterLaunch bodyb1">Lançamentos</div>
+                </a>
+                <a href="/products/Feminino">
+                    <div class="div_FooterFeminine bodyb1">Feminino</div>
+                </a>
+                <a href="/products/Masculino">
+                    <div class="div_FooterMasculine bodyb1">Masculino</div>
+                </a>
+            </div>
+            <a href="/produtos/@collectionChosen.Name">
+                <div class="div_FooterGoBeginning">Voltar ao início</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+@* @if (OpenModalProduct)
+    {
+    <ModalProduct OnClose="@OnProductModalClose"></ModalProduct>
+    } *@
+
+@code {
+
+
+    [Parameter]
+    public String Name { get; set; } = null!;
+
+    public List<Collection>? collections = new List<Collection>();
+    public List<Product>? products = new List<Product>();
+
+    public String srcSize { get; set; } = null!;
+    public String classNameSize { get; set; } = null!;
+
+    public String srcPrice { get; set; } = null!;
+    public String classNamePrice { get; set; } = null!;
+
+    public String Size { get; set; } = null!;
+
+    public String Price { get; set; } = null!;
+
+    public Collection? collectionChosen { get; set; } = null!;
+
+    public bool OpenModalProduct { get; set; }
+
+    private void OnProductModalClose(bool accepted)
+    {
+        OpenModalProduct = false;
+        StateHasChanged();
+    }
+
+    private void OpenProductModal()
+    {
+        OpenModalProduct = true;
+        StateHasChanged();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        collections = await Http.GetFromJsonAsync<List<Collection>?>("collection");
+        if (Name != null)
+        {
+            collectionChosen = await Http.GetFromJsonAsync<Collection>($"collectionChosen?name={Name}");
+            if (collectionChosen != null)
+                products = await Http.GetFromJsonAsync<List<Product>?>($"listproduct/{collectionChosen.CollectionID}");
+        }
+
+
+        srcSize = "https://localhost:7232/Imagens/icon_DownArrow.png";
+        classNameSize = "btn btn-link collapsed inter-semi-bold-woodsmoke-18px div_Filter";
+        srcPrice = "https://localhost:7232/Imagens/icon_DownArrow.png";
+        classNamePrice = "btn btn-link collapsed inter-semi-bold-woodsmoke-18px div_Filter";
+    }
+
+    private void OpenProduct()
+    {
+        OpenModalProduct = true;
+        Console.WriteLine(OpenModalProduct);
+        StateHasChanged();
+    }
+
+    protected void ChangeImgSize()
+    {
+        if (srcSize == "https://localhost:7232/Imagens/icon_DownArrow.png")
+        {
+            srcSize = "https://localhost:7232/Imagens/icon_UpArrow.png";
+            classNameSize = "btn btn-link collapsed inter-semi-bold-woodsmoke-18px div_Filter Up";
+        }
+        else
+        {
+            srcSize = "https://localhost:7232/Imagens/icon_DownArrow.png";
+            classNameSize = "btn btn-link collapsed inter-semi-bold-woodsmoke-18px div_Filter";
+        }
+    }
+    protected void ChangeImgPrice()
+    {
+        if (srcPrice == "https://localhost:7232/Imagens/icon_DownArrow.png")
+        {
+            srcPrice = "https://localhost:7232/Imagens/icon_UpArrow.png";
+            classNamePrice = "btn btn-link collapsed inter-semi-bold-woodsmoke-18px div_Filter Up";
+        }
+        else
+        {
+            srcPrice = "https://localhost:7232/Imagens/icon_DownArrow.png";
+            classNamePrice = "btn btn-link collapsed inter-semi-bold-woodsmoke-18px div_Filter";
+        }
+    }
+
+    protected async Task FilterSize(ChangeEventArgs e)
+    {
+        if (collectionChosen != null)
+            products = await Http.GetFromJsonAsync<List<Product>?>($"listproduct/{collectionChosen.CollectionID}/size={e.Value}");
+    }
+    public class Collection
+    {
+        public int CollectionID { get; set; }
+        public string? Name { get; set; }
+    }
+
+    public class Product
+    {
+        public int ProductID { get; set; }
+        public string Name { get; set; } = null!;
+        public string Description { get; set; } = null!;
+        public string Color { get; set; } = null!;
+        public string Size { get; set; } = null!;
+        public decimal UnitPrice { get; set; }
+        public int StockQuantity { get; set; }
+        public char Gender { get; set; }
+        public int Status { get; set; }
+        public string? ImageUrl { get; set; } = null!;
+        public int CollectionID { get; set; }
+        public int CategoryID { get; set; }
+
+    }
+
+}

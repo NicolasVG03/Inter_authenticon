@@ -1,0 +1,253 @@
+@page "/home/{Id:int}"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<div class="div_TrioCollection"></div>
+<img class="img_TrioCollection" src="Imagens/img_TrioCollection1.png" alt="unsplash 1" />
+<img class="img_TrioCollection" src="Imagens/img_TrioCollection2.png" alt="unsplash 2" />
+<img class="img_TrioCollection" src="Imagens/img_TrioCollection3.png" alt="unsplash 3" />
+<div class="div_Header">
+    <a href="/">
+        <div class="Logo LogoHome">
+            <span class="span_authentic_white">authentic</span><span class="span_on">on</span>
+        </div>
+    </a>
+    <div class="div_HeadActions">
+        <div class="div_OptionsProducts">
+            <a href="/products/Lançamentos/?id=@Id">
+                <div class="inter-semi-bold-baby-powder-18px">Lançamentos</div>
+            </a>
+            <a href="/products/Feminino/?id=@Id">
+                <div class="inter-semi-bold-baby-powder-18px">Feminino</div>
+            </a>
+            <a href="/products/Masculino/?id=@Id">
+                <div class="inter-semi-bold-baby-powder-18px">Masculino</div>
+            </a>
+            <div class="dropdown">
+                <a class="collection dropdown-toggle inter-semi-bold-baby-powder-18px" href="#" role="button"
+                    id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Outras Catergorias
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    @if (collections != null)
+                    {
+                        @foreach (var collection in collections)
+                        {
+                            <a class="dropdown-item" href="/products/@collection.Name/?id=@Id">@collection.Name</a>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="div_Actions">
+            <div class="div_Bag">
+                <img class="img_BagIcon" src="Imagens/icon_Bag.png" alt="bag 1" />
+            </div>
+            <a href="/login">
+                <div class="div_LoginIcon">
+                    @if (customer != null)
+                    {
+                        <img class="Profile"
+                        src="https://ui-avatars.com/api/?name=@customer.Name&background=0185FF&color=FCFCFC&font-size=0.5"
+                        alt="log-in" />
+                    }
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="div_InformationTrioCollection">
+    <div class="div_TextInformation">
+        <div class="inter-Extrabold-baby-powder-72px">Scorpion</div>
+        <div class="inter-Extrabold-baby-powder-24px">Conecte-se a sua autenticidade.</div>
+    </div>
+    <a href="/products/Scorpion/?id=@Id">
+        <button class="btn_LoginSingUp btn_GoCollection" type="button">ir paracoleção</button>
+    </a>
+
+</div>
+<div class="div_InformationCompany">
+    <div class="div_InformationCompanyLeft">
+        <div class="div_InformationCompanyExchange">
+            <img class="img_InformationCompanyIconExchange" src="Imagens/icon_Exchange.png" alt="exchange 1" />
+            <div class="div_InformationExchange">
+                <div class="div_InformationExchangeTitle inter-bold-woodsmoke-24px">Devolução gratuita</div>
+                <div class="div_InformationExchangeText subtitlesb1">
+                    Se você não gostou ou não serviu,<br />a primeira troca é por nossa conta.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="div_InformationCompanyMiddle">
+        <div class="div_InformationCompanyDelivery">
+            <img class="img_InformationCompanyIconDelivery" src="Imagens/icon_BrazilianTerritory.png" alt="Frame 16" />
+            <div class="div_InformationDelivery">
+                <div class="div_InformationDeliveryTitle inter-bold-woodsmoke-24px">Receba no conforto da
+                    sua
+                    casa</div>
+                <div class="div_InformationDeliveryText subtitlesb1">Entregamos para todo o Brasil.</div>
+            </div>
+        </div>
+    </div>
+    <div class="div_InformationCompanyRight">
+        <div class="div_InformationCompanyNewsletter">
+            <img class="img_InformationCompanyIconNewsletter" src="Imagens/icon_Newspaper.png" alt="newspaper 1" />
+            <div class="div_InformationNewsletter">
+                <div class="div_InformationNewsletterTitle inter-bold-woodsmoke-24px">Newsletter</div>
+                <div class="div_InformationNewsletterText subtitlesb1">
+                    Receba promoções e todas<br />as atualizações de coleção.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="div_CarouselCollection">
+    <img class="img_CarouselCollectionImgLeft" src="@Img3" alt="Rectangle 14" />
+    <img class="img_CarouselCollectionImgCenter" src="@Img1" alt="Rectangle 12" />
+    <img class="img_CarouselCollectionImgRight" src="@Img2" alt="Rectangle 13" />
+
+    <img class="img_CarouselCollectionArrowRight" src="Imagens/icon_RightArrow.png" @onclick="ClickRight"
+        alt="Polygon 2" />
+    <img class="img_CarouselCollectionArrowLeft" src="Imagens/icon_LeftArrow.png" @onclick="ClickLeft"
+        alt="Polygon 3" />
+</div>
+<div class="div_CarouselCollectionTitle inter-bold-woodsmoke-40px">build your way</div>
+<div class="div_CarouselCollectionText">Vistir a sua essência é questão de poder</div>
+<a href="/products/build your way/?id=@Id">
+    <button class="btn_GoCollectionCarousel poppins-bold-azure-radiance-20px">ir para coleção</button>
+</a>
+<img class="img_WallsAuthenticon" src="Imagens/img_WallsXAuthenticon.png" alt="Rectangle 11" />
+<div class="div_WallsAuthenticonTitle">
+    <span class="inter-bold-woodsmoke-40px">Wa</span><span class="span_WallsYellow">ll</span><span
+        class="inter-bold-woodsmoke-40px">s X Authentic</span><span class="span_on">on</span>
+</div>
+<div class="div_WallsAuthenticonText">leve sua essência para onde for</div>
+<a href="/products/Walls X Authenticon/?id=@Id">
+    <button class="btn_GoCollectionCarousel btn_WallsAuthenticon poppins-bold-azure-radiance-20px">
+        ir para coleção
+    </button>
+</a>
+
+<div class="div_Footer">
+    <div class="div_FooterCenterItems">
+        <div class="div_FooterPart1">
+            <a class="a_FooterLogo poppins-bold-white-22px">
+                <span class="span_authentic_white">authentic</span><span class="span_on">on</span>
+            </a>
+            <div class="div_FooterCopyright">@@Copyright2022authenticon</div>
+        </div>
+        <img class="img_LineFooter" src="Imagens/img_LineFooter.png" alt="Vector 5" />
+        <div class="div_FooterPart2">
+            <div class="div_FooterPart2Items">
+                <div class="div_FooterPart2Brazil">
+                    <img class="img_FooterBrazil" src="Imagens/icon_BrazilFlag.png" alt="Frame 72" />
+                    <div class="div_FooterBrazilText bodyb1">Brasil</div>
+                </div>
+                <div class="div_FooterNewsletter bodyb1">Newsletter</div>
+                <div class="div_FooterContact bodyb1">Contato</div>
+                <a href="/products/Lançamentos/?id=@Id">
+                    <div class="div_FooterLaunch bodyb1">Lançamentos</div>
+                </a>
+                <a href="/products/Feminino/?id=@Id">
+                    <div class="div_FooterFeminine bodyb1">Feminino</div>
+                </a>
+                <a href="/products/Masculino/?id=@Id">
+                    <div class="div_FooterMasculine bodyb1">Masculino</div>
+                </a>
+            </div>
+            <a href="/home/@Id">
+                <div class="div_FooterGoBeginning">Voltar ao início</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+    public List<Collection>? collections = new List<Collection>();
+    int clickr = 0;
+    int clickl = 0;
+    string Img1 = "Imagens/img_Carousel1.png";
+    string Img2 = "Imagens/img_Carousel2.png";
+    string Img3 = "Imagens/img_Carousel3.png";
+    public Customer? customer { get; set; } = null!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        collections = await Http.GetFromJsonAsync<List<Collection>?>("collection");
+        customer = await Http.GetFromJsonAsync<Customer>($"customer/{Id}");
+    }
+
+    public class Collection
+    {
+        public string? Name { get; set; }
+    }
+
+    private void ClickLeft()
+    {
+        clickl += 1;
+
+        if (clickl == 1)
+        {
+            Img1 = "Imagens/img_Carousel3.png";
+            Img2 = "Imagens/img_Carousel1.png";
+            Img3 = "Imagens/img_Carousel2.png";
+        }
+        else if (clickl == 2)
+        {
+            Img1 = "Imagens/img_Carousel2.png";
+            Img2 = "Imagens/img_Carousel3.png";
+            Img3 = "Imagens/img_Carousel1.png";
+        }
+        else
+        {
+            clickl = 0;
+            Img1 = "Imagens/img_Carousel1.png";
+            Img2 = "Imagens/img_Carousel2.png";
+            Img3 = "Imagens/img_Carousel3.png";
+        }
+    }
+
+    private void ClickRight()
+    {
+        clickr += 1;
+
+        if (clickr == 1)
+        {
+            Img1 = "Imagens/img_Carousel2.png";
+            Img2 = "Imagens/img_Carousel3.png";
+            Img3 = "Imagens/img_Carousel1.png";
+        }
+        else if (clickr == 2)
+        {
+            Img1 = "Imagens/img_Carousel3.png";
+            Img2 = "Imagens/img_Carousel1.png";
+            Img3 = "Imagens/img_Carousel2.png";
+        }
+        else
+        {
+            clickr = 0;
+            Img1 = "Imagens/img_Carousel1.png";
+            Img2 = "Imagens/img_Carousel2.png";
+            Img3 = "Imagens/img_Carousel3.png";
+
+        }
+    }
+    public class Customer
+    {
+        public int UserID { get; set; }
+
+        public string? Name { get; set; }
+
+        public string Email { get; set; } = null!;
+
+        public int Status { get; set; }
+
+        public string? CPF { get; set; }
+
+        public string Password { get; set; } = null!;
+    }
+}

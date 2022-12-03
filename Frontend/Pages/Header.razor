@@ -1,0 +1,64 @@
+@inject HttpClient Http
+
+<div class="div_Header">
+    <div class="div_ProductIHeader">
+        <a href="/">
+            <div class="Logo LogoHome">
+                <span class="span_authentic">authentic</span><span class="span_on">on</span>
+            </div>
+        </a>
+        <div class="div_HeadActions">
+            <div class="div_OptionsProducts">
+                <a href="/products/Lançamentos">
+                    <div class="inter-semi-bold-woodsmoke-18px">Lançamentos</div>
+                </a>
+                <a href="/products/Feminino">
+                    <div class="inter-semi-bold-woodsmoke-18px">Feminino</div>
+                </a>
+                <a href="/products/Masculino">
+                    <div class="inter-semi-bold-woodsmoke-18px">Masculino</div>
+                </a>
+                <div class="dropdown">
+                    <a class="collection dropdown-toggle inter-semi-bold-woodsmoke-18px" href="#" role="button"
+                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Outras Catergorias
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        @if (collections != null)
+                        {
+                            @foreach (var collection in collections)
+                            {
+                                <a class="dropdown-item" href="/products/@collection.Name">@collection.Name</a>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="div_Actions">
+                <a href="/login">
+                    <div class="div_LoginIcon">
+                        <div class="inter-semi-bold-woodsmoke-18px">Entrar</div>
+                        <img class="img_LoginIcon" src="Imagens/icon_Login.png" alt="log-in" />
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    public List<Collection>? collections = new List<Collection>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        collections = await Http.GetFromJsonAsync<List<Collection>?>("collection");
+    }
+
+    public class Collection
+    {
+        public int CollectionID { get; set; }
+        public string? Name { get; set; }
+    }
+}

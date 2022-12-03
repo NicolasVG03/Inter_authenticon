@@ -1,0 +1,102 @@
+@page "/customerRegistration"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+
+<a href="/">
+    <div class="div_BackHome"> &lt; voltar</div>
+</a>
+<div class="Logo">
+    <span class="span_authentic">authentic</span><span class="span_on">on</span>
+</div>
+<div class="TitleLoginAccount">Crie sua conta</div>
+<div class="TitleWelcome">
+    <span class="span_welcome">Conecte-se a sua autênticidade novamente.</span>
+</div>
+<div class="div_Inputs">
+    <input type="text" id="Name" @bind="Name" placeholder="Nome" class="inter-medium-granite-gray-18px" />
+    <input type="email" id="Email" @bind="Email" placeholder="E-mail" class="inter-medium-granite-gray-18px" />
+    <input type="password" id="Password" @bind="Password" placeholder="Senha" class="inter-medium-granite-gray-18px" />
+    <input type="text" id="Phone" @bind="PhoneNumber" placeholder="Telefone" class="inter-medium-granite-gray-18px" />
+</div>
+<button class="btn_LoginSingUp btn_CreateAccount" type="button" @onclick="RegisterUser">Criar minha conta </button>
+<div class="div_SignUp Creation">
+    <span class="span inter-medium-woodsmoke-16px">Já tem uma conta? </span>
+    <a href="/login">
+        <span class="span_Underline inter-medium-azure-radiance-18px">Faça login aqui!</span>
+    </a>
+</div>
+<img class="img_LoginSingUp" src="Imagens/CadastroImg.png" alt="Rectangle 6" />
+
+@code {
+    public string Name { get; set; } = null!;
+    public string Email { get; set; } = null!;
+    public string Password { get; set; } = null!;
+    public string PhoneNumber { get; set; } = null!;
+    public CustomerCreateDTO user { get; set; } = null!;
+
+    protected async Task RegisterUser()
+    {
+        await JS.InvokeVoidAsync("ValidateInputRegistration");
+
+        var customer = new CustomerCreateDTO
+        {
+            Name = Name,
+            Email = Email,
+            Password = Password,
+            Status = 1
+        };
+
+
+        try
+        {
+            var user = await Http.GetFromJsonAsync<Boolean>($"customerVerification?email={Email}");
+
+            if (user)
+            {
+                await Http.PostAsJsonAsync<CustomerCreateDTO>("customer", customer);
+                customer = await Http.GetFromJsonAsync<CustomerCreateDTO>($"login?email={Email}&password={Password}");
+                if (customer != null)
+                {
+                    var phoneUser = new Phone
+                    {
+                        Number = PhoneNumber,
+                        PersonID = customer.UserID
+                    };
+                    await Http.PostAsJsonAsync<Phone>("phone", phoneUser);
+                    Navigation.NavigateTo($"/home/{customer.UserID}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("User already registered");
+            }
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Error: " + e);
+        }
+    }
+
+    public class CustomerCreateDTO
+    {
+        public int UserID { get; set; }
+
+        public string Name { get; set; } = null!;
+
+        public string Email { get; set; } = null!;
+
+        public string Password { get; set; } = null!;
+
+        public int Status { get; set; }
+
+    }
+
+    public class Phone
+    {
+        public string Number { get; set; } = null!;
+        public int PersonID { get; set; }
+    }
+
+}
