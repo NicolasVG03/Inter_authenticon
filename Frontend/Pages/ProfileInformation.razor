@@ -1,0 +1,60 @@
+@page "/profile/Information"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<div class="div_Header">
+    <div class="div_ProductIHeader center">
+        <a href="/">
+            <div class="Logo LogoHome">
+                <span class="span_authentic">authentic</span><span class="span_on">on</span>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+<div class="configuracoes-da-conta-enderecoscreen">
+    <MenuCustomer></MenuCustomer>
+    <div class="endereos-MqCXpt">Minha conta</div>
+    <div class="adicione-ou-remova-endereos-rapidamente-MqCXpt">Altere seus dados quando desejar.</div>
+
+    <div class="flex-col modalProductsDashboardAlign">
+        <div class="flex-row">
+
+        </div>
+        <div class="flex-row-1">
+            <div class="flex-col-2">
+                @* Image *@
+            </div>
+            <div class="flex-col-3 flex-col-3_Edited">
+                <div class="flex-row-3 flex-row-333">
+                    <div class="nome inter-bold-woodsmoke-16px">Nome de exibição*</div>
+                    <div class="categoria inter-bold-woodsmoke-16px">Nome completo*</div>
+                </div>
+                <div class="frame-container">
+                    <div class="frame">
+                        <input class="camisasubtitleprice inputModal profileInput" placeholder="Ex: Camisa" />
+                    </div>
+                    <div class="frame">
+                        <input class="camisasubtitleprice inputModal profileInput" placeholder="Ex: Camisa" />
+                    </div>
+                </div>
+                <div class="flex-row-4 flex-row-444">
+                    <div class="cor inter-bold-woodsmoke-16px">E-mail*</div>
+                    <div class="tamanho inter-bold-woodsmoke-16px">Telefone*</div>
+                </div>
+                <div class="frame-container">
+                    <div class="frame">
+                        <input class="camisasubtitleprice inputModal profileInput" placeholder="Ex: Camisa" />
+                    </div>
+                    <div class="frame">
+                        <input class="camisasubtitleprice inputModal profileInput" placeholder="Ex: Camisa" />
+                    </div>
+                </div>
+                <button class="btn_colection">
+                    <div class="cadastrar-produto">Salvar Alterações</div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

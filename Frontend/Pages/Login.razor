@@ -37,7 +37,6 @@
     [SupplyParameterFromQuery]
     public string Password { get; set; } = null!;
     public Person? person { get; set; } = null!;
-    public bool UserDialogOpen;
     bool Found = false;
 
     protected async Task LoginUser()
@@ -54,7 +53,16 @@
                 {
                     int id = person.UserID;
                     Found = true;
-                    Navigation.NavigateTo($"/home/{id}");
+
+                    if (person.Status == 1)
+                    {
+                        Navigation.NavigateTo($"/dashboard/{id}/Sales");
+                    }
+                    else
+                    {
+                        Navigation.NavigateTo($"/home/{id}");
+                    }
+
                 }
             }
 

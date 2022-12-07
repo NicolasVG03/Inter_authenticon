@@ -1,4 +1,4 @@
-@page "/dashboard/Sales"
+@page "/dashboard/{Id:int}/Sales"
 @inject HttpClient Http
 @inject NavigationManager Navigation
 
@@ -14,7 +14,37 @@
 
 
 <div class="configuracoes-da-conta-enderecoscreen">
-    <Menu></Menu>
+    <div class="Menu">
+        <div class="rectangle-20-MqCXpt"></div>
+        <div class="voltar-MqCXpt inter-bold-woodsmoke-20px">&lt; voltar</div>
+
+        <a href="/dashboard/@Id/Sales">
+            <div class="frame-166-MqCXpt">
+                <img class="maps-SWa9AO" src="Imagens/icon_Sales.png" alt="Maps" />
+                <div class="minha-conta-chL6k6 inter-semi-bold-woodsmoke-24px">Vendas</div>
+            </div>
+        </a>
+        <a href="/dashboard/@Id/Orders">
+            <div class="frame-165-MqCXpt">
+                <img class="maps-SWa9AO" src="Imagens/icon_Orders.png" alt="Maps" />
+                <div class="pedidos-Wap3gW inter-semi-bold-woodsmoke-24px">Pedidos</div>
+            </div>
+        </a>
+        <a href="/dashboard/@Id/Products">
+            <div class="frame-164-MqCXpt">
+                <img class="bags-Wap3gW" src="Imagens/icon_Products.png" alt="Bags" />
+                <div class="pedidos-Wap3gW inter-semi-bold-woodsmoke-24px">Produtos</div>
+            </div>
+        </a>
+
+        @if (administrator != null)
+        {
+            <div class="nicolas-MqCXpt">@administrator.Name</div>
+            <img class=" ellipse-3-MqCXpt Profile"
+            src="https://ui-avatars.com/api/?name=@administrator.Name&background=0185FF&color=FCFCFC&font-size=0.5&&?size=270"
+            alt="log-in" />
+        }
+    </div>
     <div class="endereos-MqCXpt">Vendas</div>
     <div class="adicione-ou-remova-endereos-rapidamente-MqCXpt">Aqui você encontra todos os dados de faturamento,
         produtos mais vendidos e produtos com pouco estoque.</div>
@@ -24,7 +54,7 @@
                 <div class="valorTotal inter-bold-woodsmoke-16px">Valor total
                     dos pedidos</div>
                 <div class="casa-luan-xeaAYD inter-bold-woodsmoke-8px">R$</div>
-                <div class="casa-luan-xeaAYD inter-bold-woodsmoke-32px">124.504,97</div>
+                <div class="casa-luan-xeaAYD inter-bold-woodsmoke-32px">@Value</div>
             </div>
             <div class="frame-144-ylKkaG">
                 <div class="div_InformationAboutProductTitle titlecard inter-medium-woodsmoke-18px">Detalhes
@@ -33,14 +63,14 @@
                     <div class="div_InformationAboutProductEspecificName2 inter-normal-woodsmoke-20px">Valor Recebido
                     </div>
                     <div class="div_InformationAboutProductEspecificInformation2 inter-normal-woodsmoke-18px">R$
-                        84.125,30
+                        @Value
                     </div>
                 </div>
                 <div class="div_InformationAboutProductEspecific">
                     <div class="div_InformationAboutProductEspecificName2 inter-normal-woodsmoke-20px">Quantidade
                         vendida
                     </div>
-                    <div class="div_InformationAboutProductEspecificInformation2 inter-normal-woodsmoke-18px">524
+                    <div class="div_InformationAboutProductEspecificInformation2 inter-normal-woodsmoke-18px">@Quantity
                         produtos
                     </div>
                 </div>
@@ -60,14 +90,14 @@
                 <div class="div_InformationAboutProductEspecific">
                     <div class="div_InformationAboutProductEspecificName2 inter-normal-woodsmoke-20px">Camisa Scorpion
                     </div>
-                    <div class="div_InformationAboutProductEspecificInformation2 inter-normal-woodsmoke-18px">1.524
+                    <div class="div_InformationAboutProductEspecificInformation2 inter-normal-woodsmoke-18px">@Quantity
                         unidades
                     </div>
                 </div>
                 <div class="div_InformationAboutProductEspecific">
                     <div class="div_InformationAboutProductEspecificName2 inter-normal-woodsmoke-20px">Vestido Cortana
                     </div>
-                    <div class="div_InformationAboutProductEspecificInformation2 inter-normal-woodsmoke-18px">1.132
+                    <div class="div_InformationAboutProductEspecificInformation2 inter-normal-woodsmoke-18px">@Quantity
                         unidades
                     </div>
                 </div>
@@ -75,7 +105,7 @@
                     <div class="div_InformationAboutProductEspecificName2 inter-normal-woodsmoke-20px">Bermuda Panic
                         Pump
                     </div>
-                    <div class="div_InformationAboutProductEspecificInformation2 inter-normal-woodsmoke-18px">824
+                    <div class="div_InformationAboutProductEspecificInformation2 inter-normal-woodsmoke-18px">@Quantity
                         unidades
                     </div>
                 </div>
@@ -83,3 +113,65 @@
         </div>
     </div>
 </div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    public Administrator? administrator { get; set; } = null!;
+
+    public List<Order>? orders { get; set; } = null!;
+
+    decimal Value = 0;
+    decimal Quantity = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        administrator = await Http.GetFromJsonAsync<Administrator>($"administrator/?id={Id}");
+        orders = await Http.GetFromJsonAsync<List<Order>?>("Order");
+
+        foreach (var order in orders)
+        {
+            Value += order.TotalPriceOrder;
+            Quantity += 1;
+        }
+
+        if (administrator != null)
+        {
+            int id = administrator.UserID;
+
+            Console.WriteLine(id);
+
+        }
+
+    }
+
+    public class Administrator
+    {
+        public int UserID { get; set; }
+
+        public string? Name { get; set; }
+
+        public string Email { get; set; } = null!;
+
+        public int Status { get; set; }
+
+        public string Password { get; set; } = null!;
+
+    }
+
+    public class Order
+    {
+        public int OrderID { get; set; }
+
+        public decimal Freight { get; set; }
+
+        public decimal TotalPriceOrder { get; set; }
+
+        public int Status { get; set; }
+
+    }
+
+
+}

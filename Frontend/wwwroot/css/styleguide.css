@@ -15,6 +15,7 @@
   --cinnabar: rgba(226, 53, 53, 1);
   --gallery: rgba(239, 239, 239, 1);
   --cultured-pearl: rgba(14, 14, 16, 0.05);
+  --cultured-pearlIcon: rgba(245, 245, 245, 1);
   --baby-powder: rgba(252, 252, 252, 1);
   --baby-powder-2: rgba(252, 252, 252, 0.051);
   --baby-powder-3: rgba(252, 252, 252, 0.56);
@@ -27,6 +28,7 @@
   --font-size-xl: 24px;
   --font-size-xxl: 32px;
   --font-size-xxxl: 40px;
+  --font-size-G: 48px;
   --font-size-GG: 72px;
 
   --font-family-inter: "Inter";
@@ -57,6 +59,14 @@
   font-size: var(--font-size-xxxl);
   font-weight: 700;
   font-style: normal;
+}
+
+.inter-Extrabold-woodsmoke-48px {
+  color: var(--woodsmoke);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-G);
+  font-weight: 800;
+  line-height: 78px;
 }
 
 .inter-semi-bold-azure-radiance-18px {
@@ -224,6 +234,14 @@
   font-family: var(--font-family-inter);
   font-size: var(--font-size-m);
   font-weight: 700;
+  font-style: normal;
+}
+
+.inter-semi-bold-woodsmoke-20px {
+  color: var(--woodsmoke);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-m);
+  font-weight: 600;
   font-style: normal;
 }
 

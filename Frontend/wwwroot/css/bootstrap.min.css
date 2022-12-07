@@ -38,7 +38,7 @@
 *,
 ::after,
 ::before {
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 html {
@@ -100,7 +100,7 @@ h6 {
 
 p {
     margin-top: 0;
-    margin-bottom: 1rem
+    margin-bottom: 1rem;
 }
 
 abbr[data-original-title],
@@ -257,7 +257,7 @@ button {
 
 button:focus {
     outline: 1px dotted;
-    outline: 5px auto -webkit-focus-ring-color
+    /* outline: 5px auto -webkit-focus-ring-color; */
 }
 
 button,
@@ -273,7 +273,7 @@ textarea {
 
 button,
 input {
-    overflow: visible
+    /* overflow: visible; */
 }
 
 button,
@@ -285,7 +285,7 @@ select {
 [type=submit],
 button,
 html [type=button] {
-    -webkit-appearance: button
+    /* -webkit-appearance: button; */
 }
 
 [type=button]::-moz-focus-inner,
@@ -3333,7 +3333,7 @@ input[type=submit].btn-block {
 .dropleft,
 .dropright,
 .dropup {
-    position: relative
+    position: relative;
 }
 
 .dropdown-toggle::after {
@@ -5818,7 +5818,7 @@ button.close {
 .modal-dialog {
     position: relative;
     width: auto;
-    margin: .5rem;
+    /* margin: .5rem; */
     pointer-events: none
 }
 
@@ -5861,7 +5861,7 @@ button.close {
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column;
-    width: 100%;
+    /* width: 100%; */
     pointer-events: auto;
     background-color: #fff;
     background-clip: padding-box;
@@ -5896,7 +5896,7 @@ button.close {
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding: 1rem;
-    border-bottom: 1px solid #e9ecef;
+    /* border-bottom: 1px solid #e9ecef; */
     border-top-left-radius: .3rem;
     border-top-right-radius: .3rem
 }
@@ -5947,12 +5947,12 @@ button.close {
 
 @media (min-width:576px) {
     .modal-dialog {
-        max-width: 500px;
-        margin: 1.75rem auto
+        /* max-width: 500px; */
+        /* margin: 1.75rem auto; */
     }
 
     .modal-dialog-centered {
-        min-height: calc(100% - (1.75rem * 2))
+        min-height: calc(100% - (1.75rem * 2));
     }
 
     .modal-dialog-centered::before {

@@ -16,9 +16,11 @@ public class AdministratorController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult Read()
+    public ActionResult Read(int id)
     {
-        return Ok(db.Administrators.Include(a => a.Phones).ToList());
+        Administrator? administrator = db.Administrators.Find(id);
+
+        return Ok(administrator);
     }
 
     [HttpPost]

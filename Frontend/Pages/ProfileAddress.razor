@@ -1,0 +1,71 @@
+@page "/profile/Address"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+
+<div class="div_Header">
+    <div class="div_ProductIHeader center">
+        <a href="/">
+            <div class="Logo LogoHome">
+                <span class="span_authentic">authentic</span><span class="span_on">on</span>
+            </div>
+        </a>
+    </div>
+</div>
+
+<ModalAddAddress></ModalAddAddress>
+<div class="configuracoes-da-conta-enderecoscreen">
+    <MenuCustomer></MenuCustomer>
+    <div class="endereos-MqCXpt">Minha conta</div>
+    <div class="adicione-ou-remova-endereos-rapidamente-MqCXpt">Altere seus dados quando desejar.</div>
+
+    <div class="endereos-MqCXpt frame-36">
+        <button class="addProduct" data-toggle="modal" data-target="#modal-contatoAddress">
+            <div class="adicionar-produto">Adicionar Endereço
+                <img class="frame-141" src="Imagens/icon_Add.png" alt="Frame 141" />
+            </div>
+        </button>
+
+    </div>
+
+    <div class="frame-146-MqCXpt background">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col div_productsCol">
+                    <div class="frame-14">
+                        <div class="frame-145">
+                            <div class="frame-143">
+                                <div class="casa-luan inter-bold-woodsmoke-20px">Casa Luan</div>
+                                <img class="frame-142" src="Imagens/icon_editAddress.png" alt="Frame 142" />
+                            </div>
+                            <div class="frame-144">
+                                <div class="phone inter-medium-woodsmoke-16px">15025-520</div>
+                                <div class="rua-ipiranga-4991 inter-medium-woodsmoke-16px">Rua Ipiranga, 4991</div>
+                                <div class="apto-211 inter-medium-woodsmoke-16px">Apto 211</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col div_productsCol">
+                    <div class="frame-14">
+                        <div class="frame-145">
+                            <div class="frame-143">
+                                <div class="casa-luan inter-bold-woodsmoke-20px">Casa Luan</div>
+                                <img class="frame-142" src="Imagens/icon_editAddress.png" alt="Frame 142" />
+                            </div>
+                            <div class="frame-144">
+                                <div class="phone inter-medium-woodsmoke-16px">15025-520</div>
+                                <div class="rua-ipiranga-4991 inter-medium-woodsmoke-16px">Rua Ipiranga, 4991</div>
+                                <div class="apto-211 inter-medium-woodsmoke-16px">Apto 211</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

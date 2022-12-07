@@ -1,4 +1,4 @@
-@page "/dashboard/Orders"
+@page "/dashboard/{Id:int}/Orders"
 @inject HttpClient Http
 @inject NavigationManager Navigation
 
@@ -116,92 +116,138 @@
 </div>
 
 <div class="configuracoes-da-conta-enderecoscreen">
-    <Menu></Menu>
+    <div class="Menu">
+        <div class="rectangle-20-MqCXpt"></div>
+        <div class="voltar-MqCXpt inter-bold-woodsmoke-20px">&lt; voltar</div>
+
+        <a href="/dashboard/@Id/Sales">
+            <div class="frame-166-MqCXpt">
+                <img class="maps-SWa9AO" src="Imagens/icon_Sales.png" alt="Maps" />
+                <div class="minha-conta-chL6k6 inter-semi-bold-woodsmoke-24px">Vendas</div>
+            </div>
+        </a>
+        <a href="/dashboard/@Id/Orders">
+            <div class="frame-165-MqCXpt">
+                <img class="maps-SWa9AO" src="Imagens/icon_Orders.png" alt="Maps" />
+                <div class="pedidos-Wap3gW inter-semi-bold-woodsmoke-24px">Pedidos</div>
+            </div>
+        </a>
+        <a href="/dashboard/@Id/Products">
+            <div class="frame-164-MqCXpt">
+                <img class="bags-Wap3gW" src="Imagens/icon_Products.png" alt="Bags" />
+                <div class="pedidos-Wap3gW inter-semi-bold-woodsmoke-24px">Produtos</div>
+            </div>
+        </a>
+
+        @if (administrator != null)
+        {
+            <div class="nicolas-MqCXpt">@administrator.Name</div>
+            <img class=" ellipse-3-MqCXpt Profile"
+            src="https://ui-avatars.com/api/?name=@administrator.Name&background=0185FF&color=FCFCFC&font-size=0.5&&?size=270"
+            alt="log-in" />
+        }
+    </div>
     <div class="endereos-MqCXpt">Pedidos</div>
     <div class="adicione-ou-remova-endereos-rapidamente-MqCXpt">Aqui você encontra todos os pedidos, podendo confirmar,
         excluir e visualizar cada um.</div>
 
     <div class="frame-146-MqCXpt background">
-        <div class="headerorder-xXpAQP">
-            <div class="frame-156-MzCI4w">
-                <div class="frame-155-w8xfty">
-                    <div class="frame-153-UQCwGm">
-                        <div class="frame-149-CFclLN">
-                            <div class="pedido-lzpZVW inter-bold-woodsmoke-16px">Pedido</div>
-                            <div class="pedido0003-lzpZVW inter-medium-woodsmoke-16px">#Pedido0003</div>
+        @foreach (var order in orders)
+        {
+            <div class="headerorder-xXpAQP">
+                <div class="frame-156-MzCI4w">
+                    <div class="frame-155-w8xfty">
+                        <div class="frame-153-UQCwGm">
+                            <div class="frame-149-CFclLN">
+                                <div class="pedido-lzpZVW inter-bold-woodsmoke-16px">Pedido</div>
+                                <div class="pedido0003-lzpZVW inter-medium-woodsmoke-16px">#Pedido000 @order.OrderID</div>
+                            </div>
+                            <div class="frame-150-CFclLN">
+                                <div class="data-do-pedido-z4Aq53 inter-bold-woodsmoke-16px">Data do pedido</div>
+                                <div class="x12112022-z4Aq53 inter-medium-woodsmoke-16px">@order.OrderDate</div>
+                            </div>
                         </div>
-                        <div class="frame-150-CFclLN">
-                            <div class="data-do-pedido-z4Aq53 inter-bold-woodsmoke-16px">Data do pedido</div>
-                            <div class="x12112022-z4Aq53 inter-medium-woodsmoke-16px">12/11/2022</div>
-                        </div>
-                    </div>
-                    <div class="frame-154-UQCwGm">
-                        <div class="frame-151-Vc8dpm">
-                            <div class="status-do-pedido-hhCxFn inter-bold-woodsmoke-16px">Status do pedido</div>
-                            <div class="em-processo-hhCxFn">Em processo</div>
-                        </div>
+                        <div class="frame-154-UQCwGm">
+                            <div class="frame-151-Vc8dpm">
+                                <div class="status-do-pedido-hhCxFn inter-bold-woodsmoke-16px">Status do pedido</div>
 
-                    </div>
-                </div>
-                <button type="button" class="btn btn-primary btnOrdersDashboard" data-toggle="modal"
-                    data-target="#modal-contato">
-                    <img class="polygon-3-w8xfty" src="Imagens/icon_DownArrow.png" alt="Polygon 3" />
-                </button>
-            </div>
-        </div>
+                                @if (order.Status == 0)
+                                {
+                                    <div class="em-processo-hhCxFn">Em processo</div>
+                                }
+                                else if (order.Status == 1)
+                                {
+                                    <div class="em-processo-hhCxFn">Concluido</div>
+                                }
+                                else
+                                {
+                                    <div class="em-processo-hhCxFn">Cancelado</div>
+                                }
 
-        <div class="headerorder-xXpAQP">
-            <div class="frame-156-MzCI4w">
-                <div class="frame-155-w8xfty">
-                    <div class="frame-153-UQCwGm">
-                        <div class="frame-149-CFclLN">
-                            <div class="pedido-lzpZVW inter-bold-woodsmoke-16px">Pedido</div>
-                            <div class="pedido0003-lzpZVW inter-medium-woodsmoke-16px">#Pedido0003</div>
-                        </div>
-                        <div class="frame-150-CFclLN">
-                            <div class="data-do-pedido-z4Aq53 inter-bold-woodsmoke-16px">Data do pedido</div>
-                            <div class="x12112022-z4Aq53 inter-medium-woodsmoke-16px">12/11/2022</div>
-                        </div>
-                    </div>
-                    <div class="frame-154-UQCwGm">
-                        <div class="frame-151-Vc8dpm">
-                            <div class="status-do-pedido-hhCxFn inter-bold-woodsmoke-16px">Status do pedido</div>
-                            <div class="em-processo-hhCxFn">Em processo</div>
-                        </div>
+                            </div>
 
+                        </div>
                     </div>
-                </div>
-                <button type="button" class="btn btn-primary btnOrdersDashboard" data-toggle="modal"
+                    <button type="button" class="btn btn-primary btnOrdersDashboard" data-toggle="modal"
                     data-target="#modal-contato">
-                    <img class="polygon-3-w8xfty" src="Imagens/icon_DownArrow.png" alt="Polygon 3" />
-                </button>
-            </div>
-        </div>
-        <div class="headerorder-xXpAQP">
-            <div class="frame-156-MzCI4w">
-                <div class="frame-155-w8xfty">
-                    <div class="frame-153-UQCwGm">
-                        <div class="frame-149-CFclLN">
-                            <div class="pedido-lzpZVW inter-bold-woodsmoke-16px">Pedido</div>
-                            <div class="pedido0003-lzpZVW inter-medium-woodsmoke-16px">#Pedido0003</div>
-                        </div>
-                        <div class="frame-150-CFclLN">
-                            <div class="data-do-pedido-z4Aq53 inter-bold-woodsmoke-16px">Data do pedido</div>
-                            <div class="x12112022-z4Aq53 inter-medium-woodsmoke-16px">12/11/2022</div>
-                        </div>
-                    </div>
-                    <div class="frame-154-UQCwGm">
-                        <div class="frame-151-Vc8dpm">
-                            <div class="status-do-pedido-hhCxFn inter-bold-woodsmoke-16px">Status do pedido</div>
-                            <div class="em-processo-hhCxFn">Em processo</div>
-                        </div>
-                    </div>
+                        <img class="polygon-3-w8xfty" src="Imagens/icon_DownArrow.png" alt="Polygon 3" />
+                    </button>
                 </div>
-                <button type="button" class="btn btn-primary btnOrdersDashboard" data-toggle="modal"
-                    data-target="#modal-contato">
-                    <img class="polygon-3-w8xfty" src="Imagens/icon_DownArrow.png" alt="Polygon 3" />
-                </button>
             </div>
-        </div>
+        }
     </div>
 </div>
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+
+    public Administrator? administrator { get; set; } = null!;
+
+    public List<Order>? orders { get; set; } = null!;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        administrator = await Http.GetFromJsonAsync<Administrator>($"administrator/?id={Id}");
+        orders = await Http.GetFromJsonAsync<List<Order>?>("Order");
+
+        if (administrator != null)
+        {
+            int id = administrator.UserID;
+
+            Console.WriteLine(id);
+
+        }
+
+    }
+
+    public class Administrator
+    {
+        public int UserID { get; set; }
+
+        public string? Name { get; set; }
+
+        public string Email { get; set; } = null!;
+
+        public int Status { get; set; }
+
+        public string Password { get; set; } = null!;
+
+    }
+
+    public class Order
+    {
+        public int OrderID { get; set; }
+
+        public DateTime OrderDate { get; set; }
+
+        public decimal Freight { get; set; }
+
+        public decimal TotalPriceOrder { get; set; }
+
+        public int Status { get; set; }
+
+    }
+
+}

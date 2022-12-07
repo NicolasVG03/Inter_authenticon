@@ -1,0 +1,106 @@
+@page "/products/modalshoppingcar"
+
+<div class="modal fade" id="modal-contatoShoppingCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="false">
+    <div class="modal-dialog ModalProductsDashboard modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-product2screen">
+                <div class="flex-col modalProductsDashboardAlign">
+                    <div class="flex-row">
+                        <div class="flex-col-1">
+                            <h1 class="inter-Extrabold-woodsmoke-48px">Nome Produto</h1>
+                        </div>
+                        <img class="x" data-dismiss="modal" src="Imagens/icon_Cancel.png" alt="x" />
+                    </div>
+                    <div class="flex-row-1">
+                        <div class="flex-col-2">
+                            <img class="Img_Products" src="Imagens/img_ListProducts1.png" alt="Rectangle 17" />
+
+                        </div>
+                        <div class="flex-col-3">
+                            <div class="flex-row-3">
+                                <div class="nome inter-bold-woodsmoke-16px">Nome*</div>
+                                <div class="categoria inter-bold-woodsmoke-16px">Coleção*</div>
+                            </div>
+                            <div class="frame-container">
+                                <div class="frame">
+                                    <input class="camisasubtitleprice inputModal" disabled=""
+                                        placeholder="Ex: Camisa" />
+                                </div>
+                                <div class="frame">
+                                    <input class="camisasubtitleprice inputModal" disabled=""
+                                        placeholder="Ex: Camisa" />
+                                </div>
+                            </div>
+                            <div class="flex-row-4">
+                                <div class="cor inter-bold-woodsmoke-16px">Cor*</div>
+                                <div class="tamanho inter-bold-woodsmoke-16px">Tamanho*</div>
+                            </div>
+                            <div class="frame-container">
+                                <div class="frame">
+                                    <div class="frame-222 inputModal">
+                                        <div class="dropdown dropdownDashboard">
+                                            <a class="collection dropdown-toggle inter-semi-bold-woodsmoke-20px"
+                                                href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                Selecione uma cor
+                                            </a>
+
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                @* @if (collections != null)
+                                                    {
+                                                    @foreach (var collection in collections)
+                                                    {
+                                                    <a class="dropdown-item"
+                                                    href="/products/@collection.Name/?id=@Id">@collection.Name</a>
+                                                    }
+                                                    } *@
+                                                <a class="dropdown-item" href="/products/">Name</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="frame">
+                                    <div class="frame-222 inputModal">
+                                        <div class="dropdown dropdownDashboard">
+                                            <a class="collection dropdown-toggle inter-semi-bold-woodsmoke-20px"
+                                                href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                Selecione um tamanho
+                                            </a>
+
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                @* @if (collections != null)
+                                                    {
+                                                    @foreach (var collection in collections)
+                                                    {
+                                                    <a class="dropdown-item"
+                                                    href="/products/@collection.Name/?id=@Id">@collection.Name</a>
+                                                    }
+                                                    } *@
+                                                <a class="dropdown-item" href="/products/">Name</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="subttulo inter-bold-woodsmoke-16px">Quantidade</div>
+                            <div class="">
+                                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                    <button type="button"
+                                        class="btn btn-outline-primary btn_QuantityProduct left">-</button>
+                                    <span class="btn btn-outline-primary btn_QuantityProduct left right">1</span>
+                                    <button type="button"
+                                        class="btn btn-outline-primary btn_QuantityProduct right">+</button>
+                                </div>
+                            </div>
+                            <button class="btn_colection">
+                                <div class="cadastrar-produto">Adicionar ao Carrinho</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

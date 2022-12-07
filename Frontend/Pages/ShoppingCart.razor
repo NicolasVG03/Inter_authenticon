@@ -6,40 +6,52 @@
 <div class="div_TitleShoppingCart">Meu Carrinho</div>
 <div class="div_ShoppingCart">
     <div class="card mb-3 card_ProductShoppingCart" style="max-width: 540px;">
-        <div class="row g-0 cardProduct">
-            <div class="col-md-4 col_ImgProductShoppingCart">
-                <img src="Imagens/img_ListProducts1.png" class="Img_ProductShoppingCart" alt="...">
-            </div>
-            <div class="col-md-8 col_InformationProductShoppingCart">
-                <div class="card-body div_InformationProductShoppingCart">
-                    <div class="div_InformationAboutProductTitle inter-medium-woodsmoke-32px">Bolsa Masculina
-                        Street</div>
-                    <div class="div_InformationAboutProduct">
-                        <div class="div_InformationAboutProductEspecific">
-                            <div class="div_InformationAboutProductEspecificName inter-normal-woodsmoke-20px">Cor</div>
-                            <div class="div_InformationAboutProductEspecificInformation inter-normal-woodsmoke-20px">
-                                Preto</div>
-                        </div>
-                        <div class="div_InformationAboutProductEspecific">
-                            <div class="div_InformationAboutProductEspecificName inter-normal-woodsmoke-20px">Tamanho
-                            </div>
-                            <div class="div_InformationAboutProductEspecificInformation inter-normal-woodsmoke-20px">M
-                            </div>
-                        </div>
+
+        @if (orders != null)
+        {
+
+            @foreach (var product in orders)
+            {
+                <div class="row g-0 cardProduct">
+                    <div class="col-md-4 col_ImgProductShoppingCart">
+                        <img src="Imagens/img_ListProducts1.png" class="Img_ProductShoppingCart" alt="...">
                     </div>
-                    <div class="btn-group" role="group" aria-label="Basic outlined example">
-                        <button type="button" class="btn btn-outline-primary btn_QuantityProduct left">-</button>
-                        <span class="btn btn-outline-primary btn_QuantityProduct left right">1</span>
-                        <button type="button" class="btn btn-outline-primary btn_QuantityProduct right">+</button>
-                    </div>
-                    <div class="div_productDelete">
-                        <img class="x-VOKTQe" src="Imagens/icon_CleanShoppingCart.png" alt="x" />
-                        <div class="limpar-carrinho-VOKTQe inter-bold-cinnabar-16px">Excluir item
+                    <div class="col-md-8 col_InformationProductShoppingCart">
+                        <div class="card-body div_InformationProductShoppingCart">
+                            <div class="div_InformationAboutProductTitle inter-medium-woodsmoke-32px">
+                                @product.productOrder
+                            </div>
+                            <div class="div_InformationAboutProduct">
+                                <div class="div_InformationAboutProductEspecific">
+                                    <div class="div_InformationAboutProductEspecificName inter-normal-woodsmoke-20px">Cor</div>
+                                    <div class="div_InformationAboutProductEspecificInformation inter-normal-woodsmoke-20px">
+                                        @product.TotalPriceProduct</div>
+                                </div>
+                                <div class="div_InformationAboutProductEspecific">
+                                    <div class="div_InformationAboutProductEspecificName inter-normal-woodsmoke-20px">Tamanho
+                                    </div>
+                                    <div class="div_InformationAboutProductEspecificInformation inter-normal-woodsmoke-20px">
+                                        @product.TotalPriceProduct
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                <button type="button" class="btn btn-outline-primary btn_QuantityProduct left">-</button>
+                                <span
+                            class="btn btn-outline-primary btn_QuantityProduct left right">@product.QuantityOrdered</span>
+                                <button type="button" class="btn btn-outline-primary btn_QuantityProduct right">+</button>
+                            </div>
+                            <div class="div_productDelete">
+                                <img class="x-VOKTQe" src="Imagens/icon_CleanShoppingCart.png" alt="x" />
+                                <button>
+                                    <div class="limpar-carrinho-VOKTQe inter-bold-cinnabar-16px">Excluir item</div>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            }
+        }
     </div>
 </div>
 
@@ -113,5 +125,64 @@
 
     [Parameter]
     public int? Id { get; set; }
+
+
+    public List<OrderProduct>? orders { get; set; } = null!;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        orders = await Http.GetFromJsonAsync<List<OrderProduct>?>($"shoppingcart/{Id}");
+
+    }
+
+    protected async Task Delete(int idProduct)
+    {
+        await Http.DeleteAsync($"orderproduct/{Id}/{idProduct}");
+    }
+
+
+    public class OrderProduct
+    {
+        public int QuantityOrdered { get; set; }
+
+        public decimal TotalPriceProduct { get; set; }
+
+        public Order orderOrder { get; set; } = null!;
+
+        public Product productOrder { get; set; } = null!;
+
+    }
+
+    public class Order
+    {
+        public int OrderID { get; set; }
+
+        public DateTime OrderDate { get; set; }
+
+        public decimal Freight { get; set; }
+
+        public decimal TotalPriceOrder { get; set; }
+
+        public int Status { get; set; }
+
+    }
+
+    public class Product
+    {
+        public int ProductID { get; set; }
+        public string Name { get; set; } = null!;
+        public string Description { get; set; } = null!;
+        public string Color { get; set; } = null!;
+        public string Size { get; set; } = null!;
+        public decimal UnitPrice { get; set; }
+        public int StockQuantity { get; set; }
+        public char Gender { get; set; }
+        public int Status { get; set; }
+        public string? ImageUrl { get; set; } = null!;
+        public int CollectionID { get; set; }
+        public int CategoryID { get; set; }
+
+    }
 
 }

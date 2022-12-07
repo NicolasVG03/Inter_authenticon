@@ -20,19 +20,16 @@ public class ProductControllers : ControllerBase
     {
         return Ok(db.Products
                     .Include(collection => collection.Collection)
-                    .Include(category => category.Category)
-                    .Include(administrator => administrator.Administrator)
                     .ToList());
     }
 
     [HttpPost]
     public ActionResult Create([FromForm] Product product)
     {
-        string pathImage = "ImagensDownload/" + product.Name + ".jpg";
-        string path = "Backend/";
+        string pathImage = product.Name + ".jpg";
 
         product.ImageFile.CopyToAsync(new FileStream(pathImage, FileMode.Create));
-        product.ImageUrl = path + pathImage;
+        product.ImageUrl = pathImage;
 
         db.Products.Add(product);
         db.SaveChanges();
